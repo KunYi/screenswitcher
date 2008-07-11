@@ -1,0 +1,92 @@
+import "D:\Microsoft Visual Studio 8\VC\PlatformSDK\include\prsht.idl";
+import "D:\Microsoft Visual Studio 8\VC\PlatformSDK\include\mshtml.idl";
+import "d:\microsoft visual studio 8\vc\platformsdk\include\dimm.idl";
+import "D:\Microsoft Visual Studio 8\VC\PlatformSDK\include\mshtmhst.idl";
+import "d:\microsoft visual studio 8\vc\platformsdk\include\docobj.idl";
+import "D:\Microsoft Visual Studio 8\VC\PlatformSDK\include\exdisp.idl";
+import "D:\Microsoft Visual Studio 8\VC\PlatformSDK\include\objsafe.idl";
+
+[
+	object,
+	uuid(C8B15683-FE3E-4a49-864B-ED9DAAA28966),
+	dual,
+	helpstring("ButtonParams Interface"),
+	pointer_default(unique)
+] 
+#line 89 "c:\\documents and settings\\burakso\\desktop\\hidcom64bit\\hidmappercom\\hidmanager\\hidmanager.h"
+interface IButtonParams : IDispatch {
+#line 91 "c:\\documents and settings\\burakso\\desktop\\hidcom64bit\\hidmappercom\\hidmanager\\hidmanager.h"
+	[id(1),helpstring("Initialize method")] HRESULT  Initialize([in] unsigned short uHidPage, [in] unsigned short uHidUsage, [in] unsigned short uButtonUsage, [in] WCHAR *wszButtonType);
+	[propput,id(2),helpstring("HIDPage property")] HRESULT  HIDPage([in] unsigned short uHidPage);
+	[propget,id(2),helpstring("HIDPage property")] HRESULT  HIDPage([out,retval] unsigned short *puHidPage);
+	[propput,id(3),helpstring("HIDUsage property")] HRESULT  HIDUsage([in] unsigned short uHidUsage);
+	[propget,id(3),helpstring("HIDUsage property")] HRESULT  HIDUsage([out,retval] unsigned short *puHidUsage);
+	[propput,id(4),helpstring("ButtonUsage property")] HRESULT  ButtonUsage([in] unsigned short uButtonUsage);
+	[propget,id(4),helpstring("ButtonUsage property")] HRESULT  ButtonUsage([out,retval] unsigned short *puButtonUsage);
+	[propput,id(5),helpstring("ButtonType property")] HRESULT  ButtonType([in] BSTR bstrButtonType);
+	[propget,id(5),helpstring("ButtonType property")] HRESULT  ButtonType([out,retval] BSTR *pbstrButtonType);
+};
+
+[
+	object,
+	uuid(C1607EF3-CA5E-44bb-A0BC-18224670DB31),
+	dual,
+	helpstring("HidManager Interface"),
+	pointer_default(unique)
+] 
+#line 125 "c:\\documents and settings\\burakso\\desktop\\hidcom64bit\\hidmappercom\\hidmanager\\hidmanager.h"
+interface IHidManager : IDispatch {
+#line 127 "c:\\documents and settings\\burakso\\desktop\\hidcom64bit\\hidmappercom\\hidmanager\\hidmanager.h"
+	[id(1),helpstring("method FindHidDevice")] HRESULT  FindHidDevice([in] unsigned short uVendorId, [in] unsigned short uProductId, [out,retval] VARIANT_BOOL *pbResult);
+	[id(2),helpstring("method GetButtonStatus")] HRESULT  GetButtonStatus([in] int nButtonNumber, [out,retval] int *pButtonStatus);
+	[id(3),helpstring("method SetButtonStatus")] HRESULT  SetButtonStatus([in] int nButtonNumber, [in] int nButtonStatus);
+	[id(4),helpstring("method GetLedStatus")] HRESULT  GetLedStatus([in] int nLedNumber, [out,retval] int *pLedStatus);
+	[id(5),helpstring("method SetLedStatus")] HRESULT  SetLedStatus([in] int nLedNumber, [in] int nLedStatus);
+	[id(6),helpstring("method SetMultiLedStatus")] HRESULT  SetMultiLedStatus([in] int nMultiLedMask);
+	[id(7),helpstring("method SimulateLoopback")] HRESULT  SimulateLoopback([in] unsigned char *pBuffer);
+	[id(8),helpstring("method SimulateHidKeycode")] HRESULT  SimulateHidKeycode([in] unsigned short uHidPage, [in] unsigned short uHidUsage, [in] unsigned short uHidButtonUsage, [in] unsigned short uKeyModifiers);
+	[id(9),helpstring("method FireOnButtonPressed")] HRESULT  FireOnButtonPressed([in] IButtonParams *piButtonParams);
+};
+
+
+[ version(1.0), uuid(17A600B7-4DD1-4d8d-BAF8-E4FFC592B999), helpstring("HidManager 1.0.0.4 Type Library") ]
+library HidManager
+{
+	importlib("stdole2.tlb");
+	importlib("olepro32.dll");
+
+	[
+		uuid(18976042-0890-4dd6-AC79-C042AB95894C),
+		helpstring("HidEvent Interface")
+	] 
+#line 111 "c:\\documents and settings\\burakso\\desktop\\hidcom64bit\\hidmappercom\\hidmanager\\hidmanager.h"
+	dispinterface IHidEvent {
+	properties:
+
+	methods:
+		[id(1),helpstring("method ButtonPressed")] HRESULT  ButtonPressed([in]IButtonParams *piButtonParams);
+	};
+
+	[
+		version(1.0),
+		uuid(D0CE718F-574B-41a3-B157-4496FBC40738),
+		helpstring("ButtonParams Class")
+	] 
+#line 150 "c:\\documents and settings\\burakso\\desktop\\hidcom64bit\\hidmappercom\\hidmanager\\hidmanager.h"
+	coclass CButtonParams {
+		interface IButtonParams;
+	};
+
+	[
+		version(1.0),
+		uuid(E0425E75-6644-45dd-87FB-503240B2136A),
+		helpstring("HidManager Class")
+	] 
+#line 202 "c:\\documents and settings\\burakso\\desktop\\hidcom64bit\\hidmappercom\\hidmanager\\hidmanager.h"
+	coclass CHidManager {
+		interface IHidManager;
+		[default, source]	interface IHidEvent;
+	};
+
+}
+

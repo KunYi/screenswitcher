@@ -1,0 +1,271 @@
+<!DOCTYPE UI><UI version="3.3" stdsetdef="1">
+<class>Form1</class>
+<widget class="QDialog">
+    <property name="name">
+        <cstring>Form1</cstring>
+    </property>
+    <property name="enabled">
+        <bool>true</bool>
+    </property>
+    <property name="geometry">
+        <rect>
+            <x>10</x>
+            <y>13</y>
+            <width>367</width>
+            <height>310</height>
+        </rect>
+    </property>
+    <property name="sizePolicy">
+        <sizepolicy>
+            <hsizetype>5</hsizetype>
+            <vsizetype>5</vsizetype>
+            <horstretch>0</horstretch>
+            <verstretch>0</verstretch>
+        </sizepolicy>
+    </property>
+    <property name="maximumSize">
+        <size>
+            <width>367</width>
+            <height>310</height>
+        </size>
+    </property>
+    <property name="baseSize">
+        <size>
+            <width>0</width>
+            <height>0</height>
+        </size>
+    </property>
+    <property name="backgroundOrigin">
+        <enum>WindowOrigin</enum>
+    </property>
+    <property name="caption">
+        <string>Display Switch</string>
+    </property>
+    <property name="modal">
+        <bool>false</bool>
+    </property>
+    <widget class="QTabWidget">
+        <property name="name">
+            <cstring>tabWidget</cstring>
+        </property>
+        <property name="geometry">
+            <rect>
+                <x>10</x>
+                <y>10</y>
+                <width>340</width>
+                <height>290</height>
+            </rect>
+        </property>
+        <property name="backgroundOrigin">
+            <enum>WindowOrigin</enum>
+        </property>
+        <property name="focusPolicy">
+            <enum>ClickFocus</enum>
+        </property>
+        <property name="acceptDrops">
+            <bool>false</bool>
+        </property>
+        <property name="tabShape">
+            <enum>Rounded</enum>
+        </property>
+        <widget class="QWidget">
+            <property name="name">
+                <cstring>tab</cstring>
+            </property>
+            <attribute name="title">
+                <string>Clone to VGA</string>
+            </attribute>
+            <spacer>
+                <property name="name">
+                    <cstring>spacer3</cstring>
+                </property>
+                <property name="orientation">
+                    <enum>Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                    <enum>Expanding</enum>
+                </property>
+                <property name="sizeHint">
+                    <size>
+                        <width>38</width>
+                        <height>34</height>
+                    </size>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>77</x>
+                        <y>208</y>
+                        <width>38</width>
+                        <height>34</height>
+                    </rect>
+                </property>
+            </spacer>
+            <spacer>
+                <property name="name">
+                    <cstring>spacer3_2</cstring>
+                </property>
+                <property name="orientation">
+                    <enum>Horizontal</enum>
+                </property>
+                <property name="sizeType">
+                    <enum>Expanding</enum>
+                </property>
+                <property name="sizeHint">
+                    <size>
+                        <width>37</width>
+                        <height>34</height>
+                    </size>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>204</x>
+                        <y>208</y>
+                        <width>37</width>
+                        <height>34</height>
+                    </rect>
+                </property>
+            </spacer>
+            <widget class="QPushButton">
+                <property name="name">
+                    <cstring>DisableVGAButton</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>247</x>
+                        <y>208</y>
+                        <width>74</width>
+                        <height>34</height>
+                    </rect>
+                </property>
+                <property name="sizePolicy">
+                    <sizepolicy>
+                        <hsizetype>5</hsizetype>
+                        <vsizetype>5</vsizetype>
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                    </sizepolicy>
+                </property>
+                <property name="backgroundOrigin">
+                    <enum>WindowOrigin</enum>
+                </property>
+                <property name="text">
+                    <string>Disable</string>
+                </property>
+            </widget>
+            <widget class="QPushButton">
+                <property name="name">
+                    <cstring>VGAChangeButton</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>121</x>
+                        <y>208</y>
+                        <width>77</width>
+                        <height>34</height>
+                    </rect>
+                </property>
+                <property name="sizePolicy">
+                    <sizepolicy>
+                        <hsizetype>5</hsizetype>
+                        <vsizetype>5</vsizetype>
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                    </sizepolicy>
+                </property>
+                <property name="backgroundOrigin">
+                    <enum>WindowOrigin</enum>
+                </property>
+                <property name="text">
+                    <string>Change</string>
+                </property>
+            </widget>
+            <widget class="QPushButton">
+                <property name="name">
+                    <cstring>HelpButton</cstring>
+                </property>
+                <property name="geometry">
+                    <rect>
+                        <x>13</x>
+                        <y>208</y>
+                        <width>58</width>
+                        <height>34</height>
+                    </rect>
+                </property>
+                <property name="sizePolicy">
+                    <sizepolicy>
+                        <hsizetype>5</hsizetype>
+                        <vsizetype>5</vsizetype>
+                        <horstretch>0</horstretch>
+                        <verstretch>0</verstretch>
+                    </sizepolicy>
+                </property>
+                <property name="text">
+                    <string>Help</string>
+                </property>
+            </widget>
+        </widget>
+        <widget class="QWidget">
+            <property name="name">
+                <cstring>tab</cstring>
+            </property>
+            <attribute name="title">
+                <string>Clone to HDMI</string>
+            </attribute>
+        </widget>
+        <widget class="QWidget">
+            <property name="name">
+                <cstring>TabPage</cstring>
+            </property>
+            <attribute name="title">
+                <string>Clone to SVIDEO</string>
+            </attribute>
+        </widget>
+        <widget class="QWidget">
+            <property name="name">
+                <cstring>TabPage</cstring>
+            </property>
+            <attribute name="title">
+                <string>Tab</string>
+            </attribute>
+        </widget>
+        <widget class="QWidget">
+            <property name="name">
+                <cstring>TabPage</cstring>
+            </property>
+            <attribute name="title">
+                <string>Tab</string>
+            </attribute>
+        </widget>
+    </widget>
+</widget>
+<connections>
+    <connection>
+        <sender>Form1</sender>
+        <signal>destroyed(QObject*)</signal>
+        <receiver>Form1</receiver>
+        <slot>Form1_destroyed(QObject*)</slot>
+    </connection>
+    <connection>
+        <sender>VGAChangeButton</sender>
+        <signal>clicked()</signal>
+        <receiver>Form1</receiver>
+        <slot>VGAChangeButton_clicked()</slot>
+    </connection>
+    <connection>
+        <sender>DisableVGAButton</sender>
+        <signal>clicked()</signal>
+        <receiver>Form1</receiver>
+        <slot>DisableVGAButton_clicked()</slot>
+    </connection>
+</connections>
+<includes>
+    <include location="local" impldecl="in implementation">test.ui.h</include>
+</includes>
+<slots>
+    <slot>pushButton2_clicked()</slot>
+    <slot>Form1_destroyed( QObject * )</slot>
+    <slot>VGAChangeButton_clicked()</slot>
+    <slot>DisableVGAButton_clicked()</slot>
+</slots>
+<layoutdefaults spacing="6" margin="11"/>
+</UI>

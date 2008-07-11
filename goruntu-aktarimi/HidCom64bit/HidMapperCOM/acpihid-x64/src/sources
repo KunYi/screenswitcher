@@ -1,0 +1,15 @@
+TARGETNAME=acpihid
+TARGETTYPE=DRIVER
+DRIVERTYPE=WDM
+TARGETPATH=obj
+
+TARGETLIBS=$(DDK_LIB_PATH)\hidclass.lib \
+           $(DDK_LIB_PATH)\usbd.lib	\
+	   $(DDK_LIB_PATH)\ntoskrnl.lib
+
+
+INCLUDES=..\inc
+
+
+SOURCES=Main.c Acpi.c AddDevice.c CreateClose.c DispatchPnP.c DispatchPower.c InternalIoctl.c MapButtons.c Registry.c Unload.c AcpiHid.rc
+

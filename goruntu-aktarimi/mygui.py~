@@ -1,0 +1,86 @@
+from qt import *
+from goruntuaktarimi import *
+import sys, os
+
+class plugDetector(object):
+	def RegisterProcessor(self, callback):
+		callbacks.RegisterCallback(self, 'process', callback)
+	def Process(self):
+		return callbacks.RunCallbackChain(self, 'process', "")
+plugliGlobal = {}
+unplugliGlobal = {}
+
+def plugDetect(text):
+	rtr = os.popen("xrandr -q")
+	rtrli = rtr.readlines()
+	plugli = {}
+	for x in rtrli:
+		if x.find("VGA") != -1 and x.find("VGA connected") != -1: plugli["VGA"] = "connected"
+		if x.find("LVDS") != -1 and x.find("LVDS connected") != -1: plugli["LVDS"] = "connected"
+		if x.find("TMDS-1") != -1 and x.find("TMDS-1 connected") != -1: plugli["TMDS-1"] = "connected"
+		if x.find("TV") != -1 and x.find("TV connected") != -1: plugli["TV"] = "connected"
+		#else: pass
+	#print plugli
+	plugliGlobal = plugli
+
+def unplugDetect(text):
+	rtr = os.popen("xrandr -q")
+	rtrli = rtr.readlines()
+	unplugli = {}
+	for x in rtrli:
+		if x.find("VGA") != -1 and x.find("VGA disconnected") != -1: unplugli["VGA"] = "disconnected"
+		if x.find("LVDS") != -1 and x.find("LVDS disconnected") != -1: unplugli["LVDS"] = "disconnected"
+		if x.find("TMDS-1") != -1 and x.find("TMDS-1 disconnected") != -1: unplugli["TMDS-1"] = "disconnected"
+		if x.find("TV") != -1 and x.find("TV disconnected") != -1: unplugli["TV"] = "disconnected"
+		#else: pass
+	#print unplugli
+        unplugliGlobal = unplugli
+
+def unPlug():
+	plugli = plugliGlobal.keys()
+	unplugli = unplugliGlobal.keys()
+
+	for x in plugli:
+		if x not in unplugli:
+			cmd = " ".join(["xrandr --output",x,"--off"])
+			#os.popem(cmd)
+			print cmd
+
+def detectAndProcess():
+
+    	processor = plugDetector()
+    	callback1 = callbacks.PermanentCallback(plugDetect)
+    	callback2 = callbacks.PermanentCallback(unplugDetect)
+	callback3 = callbacks.PermanentCallback(unPlug)
+    	processor.RegisterProcessor(callback1)
+    	processor.RegisterProcessor(callback2)
+	processor.RegisterProcessor(callback3)
+    	processor.Process()
+	
+
+if __name__ == "__main__":
+     
+    try:	
+
+	psid =  os.getpid()
+	rule = "ps aux | grep python | grep mygui | awk '$0 !~ /grep | "+str(psid)+"/"+" {print $2}'"
+    	r=os.popen(rule)
+    	rtr=r.readlines()
+	#print rtr
+	#pid=rtr[0].strip()
+	#s = "ps aux | grep "+str(pid)
+	#os.system(s)
+    	if len(rtr) > 0:
+        	print "girdi"
+		pid=int(rtr[0].strip())
+		os.kill(pid,9)
+	else:
+		app = QApplication(sys.argv)
+    		f = Form1()
+    		f.show()
+    		app.setMainWidget(f)
+    		app.exec_loop()
+    except Exception, ex:
+    	print "Exception:", ex
+
+    

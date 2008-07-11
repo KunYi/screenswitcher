@@ -1,0 +1,42 @@
+# -*- coding: utf-8 -*-
+
+# Form implementation generated from reading ui file 'warning.ui'
+#
+# Created: Fri Jul 4 16:28:29 2008
+#      by: The PyQt User Interface Compiler (pyuic) 3.17.4
+#
+# WARNING! All changes made in this file will be lost!
+
+
+from qt import *
+
+
+class Form2(QDialog):
+    def __init__(self,parent = None,name = None,modal = 0,fl = 0):
+        QDialog.__init__(self,parent,name,modal,fl)
+
+        if not name:
+            self.setName("Form2")
+
+        self.setMaximumSize(QSize(300,100))
+
+
+        self.warningTextLabel = QLabel(self,"warningTextLabel")
+        self.warningTextLabel.setGeometry(QRect(10,10,271,71))
+        self.warningTextLabel.setPaletteForegroundColor(QColor(255,0,0))
+        self.warningTextLabel.setFrameShape(QLabel.NoFrame)
+        self.warningTextLabel.setFrameShadow(QLabel.Plain)
+
+        self.languageChange()
+
+        self.resize(QSize(300,100).expandedTo(self.minimumSizeHint()))
+        self.clearWState(Qt.WState_Polished)
+
+
+    def languageChange(self,text):
+        self.setCaption(self.__tr("Form2"))
+        self.warningTextLabel.setText(self.__tr("<p align=\"center\">"+text+"</p>"))
+
+
+    def __tr(self,s,c = None):
+        return qApp.translate("Form2",s,c)

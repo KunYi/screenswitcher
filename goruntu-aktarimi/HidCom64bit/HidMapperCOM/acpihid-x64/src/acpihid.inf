@@ -1,0 +1,123 @@
+; Intel ACPI to HID Mapper driver Inf
+; *-*-* This version is for UrbanMAX platform *-*-*
+; Copyright (c) 2006-2008 Intel Corporation
+
+
+[Version]
+Signature="$CHICAGO$"
+Class=HIDClass
+ClassGuid={745a17a0-74d3-11d0-b6fe-00a0c90f57da}
+Provider=%VENDOR%
+CatalogFile=acpihid.cat
+;LayoutFile  = layout.inf
+DriverVer=01/02/2007,1.0.0.23
+
+[SourceDisksNames.amd64]
+1 = %DiskDesc%,,
+;2 = %HidDll%,,
+
+[SourceDisksFiles.amd64]
+acpihid.sys = 1
+;Hid.dll = 2
+
+
+[DestinationDirs]
+CopyFilesSYS = 12     ; should it be 10 to take care of 98 stuff??????
+CopyFilesDLL = 11     ; %SystemRoot%\system or system32 - 98 or Win2000
+
+
+[Manufacturer]
+%VENDOR%=Vendor, ntamd64
+
+[Vendor.ntamd64]
+%acpihid%    = acpihid.Inst, GENERIC_HID_DEVICE,ACPI\AcpiHidMapper
+;%HID_DEVICE% = HID_Raw_Inst,, HID_DEVICE
+
+[ControlFlags]
+ExcludeFromSelect  = HID\MyVirtualHidDevice
+
+;===============================================================
+;   acpihid (Root Enumerated Hid Device) install section
+;===============================================================
+
+[acpihid.Inst.ntamd64]
+CopyFiles = CopyFilesSYS, CopyFilesDLL
+
+[acpihid.Inst.ntamd64.HW]
+AddReg = acpihid_Parameters.AddReg 
+
+[acpihid.Inst.ntamd64.Services]
+AddService = acpihid,0x00000002,acpihid_Service_Inst,
+
+[CopyFilesSYS]
+acpihid.sys
+;HidClass.sys
+;HidParse.sys
+
+[CopyFilesDLL]
+;Hid.dll
+
+[acpihid_Parameters.AddReg]
+
+HKR,,"ReadFromRegistry",%REG_DWORD%, 0x00000000
+
+HKR,,"HidReportDescriptor",%REG_BINARY%, 05, 0c, 09, 01, a1, 01, 85, 01, 19, 00, 2a, ff, ff, 15, 00, 26, ff, ff, 95, 01, 75, 10, 81, 00, 95, 01, 75, 07, 05, 08, 19, 01, 29, 7F, 91, 02, 95, 01, 75, 01, 91, 01, 75, 08, 95, 07, 19, 00, 29, ff, 15, 00, 25, ff, 91, 02, c0, 05, 0c, 09, 03, a1, 01, a1, 02, 85, 02, 19, 00, 2a, ff, ff, 15, 00, 26, ff, ff, 95, 01, 75, 10, 81, 00, 75, 08, 95, 08, 19, 00, 29, ff, 15, 00, 25, ff, 91, 02, c0, a1, 02, 85, 05, 05, 09, 09, 03, 26, ff, ff, 75, 10, b1, 02, 75, 10, b1, 03, c0, c0, 05, 01, 09, 06, a1, 01, 85, 03, 05, 07, 19, e0, 29, e7, 75, 01, 95, 08, 81, 02, 75, 08, 95, 01, 81, 03, 19, 00, 29, dd, 25, ff, 75, 08, 95, 06, 81, 00, 75, 08, 95, 08, 19, 00, 29, ff, 15, 00, 25, ff, 91, 02, c0, 05, 40, 09, 02, a1, 01, 85, 06, 75, 10, 95, 01, 19, 00, 2a, ff, ff, 15, 00, 26, ff, ff, 81, 02, 75, 08, 95, 06, 19, 00, 29, ff, 15, 00, 25, ff, 81, 02, 75, 10, 95, 01, 19, 00, 2a, ff, ff, 15, 00, 26, ff, ff, 91, 02, 75, 08, 95, 06, 19, 00, 29, ff, 15, 00, 25, ff, 91, 02, c0
+
+HKR,,"NumberOfLeds",%REG_DWORD%, 0x00000000
+HKR,,"NumberOfButtons",%REG_DWORD%, 0x0000000e
+
+HKR,,"HoldButton", %REG_BINARY%, 01, 00, 0C, 00, 01, 00, 38, 1 
+HKR,,"Button1",    %REG_BINARY%, 01, 00, 0C, 00, 01, 00, 32, 1 
+HKR,,"Button2",    %REG_BINARY%, 01, 00, 0C, 00, 01, 03, 01, 1
+HKR,,"Button3",    %REG_BINARY%, 01, 00, 0C, 00, 01, 03, 02, 1 
+HKR,,"Button4",    %REG_BINARY%, 01, 00, 0C, 00, 01, 01, BB, 1
+HKR,,"Button5",    %REG_BINARY%, 01, 00, 0C, 00, 01, 03, 03, 1
+HKR,,"Button6",    %REG_BINARY%, 01, 00, 0C, 00, 01, 03, 04, 1
+HKR,,"Button7",    %REG_BINARY%, 01, 00, 0C, 00, 01, 03, 05, 1
+HKR,,"Button8",    %REG_BINARY%, 01, 00, 0C, 00, 01, 03, 06, 1
+HKR,,"Button9",    %REG_BINARY%, 01, 00, 0C, 00, 01, 01, AA, 1
+HKR,,"Button10",   %REG_BINARY%, 01, 00, 0C, 00, 01, 01, C0, 1
+HKR,,"Button11",   %REG_BINARY%, 01, 00, 0C, 00, 01, 03, 07, 1 
+HKR,,"Button12",   %REG_BINARY%, 01, 00, 0C, 00, 01, 00, 38, 1
+HKR,,"Button13",   %REG_BINARY%, 01, 00, 0C, 00, 01, 01, AD, 1
+HKR,,"Button14",   %REG_BINARY%, 01, 00, 0C, 00, 01, 03, 08, 1 
+
+					
+[acpihid_Service_Inst]
+DisplayName    = %acpihid%
+ServiceType    = %SERVICE_KERNEL_DRIVER% 
+StartType      = %SERVICE_DEMAND_START% 
+ErrorControl   = %SERVICE_ERROR_IGNORE% 
+ServiceBinary  = %12%\acpihid.sys 
+
+
+;================================================================
+[Strings] 
+;  *******Localizable Strings******* 
+VENDOR        = "Intel Corporation" 
+acpihid       = "Intel ACPI-to-HID Mapper Driver" 
+StdMfg        = "(Standard system devices)"
+HID_DEVICE    = "HID-compliant device"
+DiskDesc      = "Intel ACPI-to-HID Mapper Driver Disk" 
+;HidDll	      = "c:\windows\system32"	
+
+
+;  *******Non Localizable Strings******* 
+
+SERVICE_BOOT_START     = 0x0 
+SERVICE_SYSTEM_START   = 0x1 
+SERVICE_AUTO_START     = 0x2 
+SERVICE_DEMAND_START   = 0x3 
+SERVICE_DISABLED       = 0x4 
+
+SERVICE_KERNEL_DRIVER  = 0x1 
+SERVICE_ERROR_IGNORE   = 0x0 
+SERVICE_ERROR_NORMAL   = 0x1 
+SERVICE_ERROR_SEVERE   = 0x2 
+SERVICE_ERROR_CRITICAL = 0x3 
+
+REG_EXPAND_SZ          = 0x00020000 
+REG_DWORD              = 0x00010001 
+REG_MULTI_SZ           = 0x00010000
+REG_BINARY             = 0x00000001
+REG_SZ                 = 0x00000000
