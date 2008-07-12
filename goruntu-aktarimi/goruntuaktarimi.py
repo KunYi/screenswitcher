@@ -20264,7 +20264,7 @@ class threadedDetector(QThread):
 			if self.pre == True and self.post == False:
 			#if pre == True and post == False:
 				print "ok"
-				os.system("xrandr --output LVDS --mode 1024x768")
+				os.system("xrandr --output LVDS --mode 1280x800")
 				os.system("xrandr --output TMDS-1 --off")
 				self.pre = None
 				self.post = None
@@ -20666,7 +20666,7 @@ class Form1(QDialog):
 	try:
 		#cmd = " ".join(["xrandr --output LVDS --mode",self.LCDlistBoxCloneToHDMI.currentText().ascii(),"--output TMDS-1 --mode",self.HDMIlistBoxClone.currentText().ascii(), "--output VGA --off"])     			
 		#print cmd
-		cmd = " ".join(["xrandr --output LVDS --off", "--output VGA --off"])  
+		cmd = " ".join(["xrandr --output LVDS --off", "--output VGA --off"]) 
         	status1 = os.system(cmd)
 		cmd = " ".join(["xrandr","--output TMDS-1 --mode",self.HDMIlistBoxClone.currentText().ascii()])
 		#print cmd

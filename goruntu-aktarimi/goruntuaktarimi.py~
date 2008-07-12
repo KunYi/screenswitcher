@@ -20666,7 +20666,7 @@ class Form1(QDialog):
 	try:
 		#cmd = " ".join(["xrandr --output LVDS --mode",self.LCDlistBoxCloneToHDMI.currentText().ascii(),"--output TMDS-1 --mode",self.HDMIlistBoxClone.currentText().ascii(), "--output VGA --off"])     			
 		#print cmd
-		cmd = " ".join(["xrandr --output LVDS --off", "--output VGA --off"])  
+		cmd = " ".join(["xrandr --output LVDS --off", "--output VGA --off"]) 
         	status1 = os.system(cmd)
 		cmd = " ".join(["xrandr","--output TMDS-1 --mode",self.HDMIlistBoxClone.currentText().ascii()])
 		#print cmd
@@ -20698,7 +20698,7 @@ class Form1(QDialog):
     def VGAExtEnableButton_clicked(self):
 
 	try:
-		cmd = " ".join(["xrandr --output LVDS --mode",self.LCDlistBoxExtToVGA.currentText().ascii(),"--pos 0x0","--output VGA --mode",self.VGAlistBoxExt.currentText().ascii(),"--pos 1024x0", "--output TMDS-1 --off"])     			
+		cmd = " ".join(["xrandr --output LVDS --mode",self.LCDlistBoxExtToVGA.currentText().ascii(),"--pos 0x0","--output VGA --mode",self.VGAlistBoxExt.currentText().ascii(),"--pos 1280x0", "--output TMDS-1 --off"])     			
 		#print cmd
         	status = os.system(cmd)
 		if status:
