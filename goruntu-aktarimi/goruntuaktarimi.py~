@@ -20653,7 +20653,8 @@ class Form1(QDialog):
     def DisableVGAButton_clicked(self):
         
 	try:
-		status  = os.system("xrandr --output VGA --of")     
+		status  = os.system("xrandr --output VGA --off")
+		print status  
 	        if status:
 			QMessageBox.warning(self, "Warning", "xrandr can not be run")
 	except Exception, ex:
@@ -20677,7 +20678,7 @@ class Form1(QDialog):
 
     def HDIDisableButton_clicked(self):
 	try:
-		status1 = os.system("xrandr --output LVDS --mode 1024x768")
+		status1 = os.system("xrandr --output LVDS --mode 1280x800")
 		status2	= os.system("xrandr --output TMDS-1 --off")
        	
 		if status1 or status2:
@@ -20707,9 +20708,11 @@ class Form1(QDialog):
 
     def VGAExtDisableButton_clicked(self):
         try:
-        	os.system("xrandr --output VGA --off")
+        	status = os.system("xrandr --output VGA --off")
+		if status:
+			QMessageBox.warning(self, "Warning", "xrandr --output can not be run")
         except Exception, ex:
-        	print ex
+        	QMessageBox.warning(self, "Warning", ex)
 
   
     def __tr(self,s,c = None):
