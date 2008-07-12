@@ -20246,7 +20246,7 @@ class threadedDetector(QThread):
 
 		#print "girdi"
 
-		#print self.pre, self.post	
+		print self.pre, self.post	
 
 		rtr = os.popen("xrandr -q")
 		rtrli = rtr.readlines()
@@ -20254,14 +20254,15 @@ class threadedDetector(QThread):
 
 			if x.find("TMDS-1") != -1:
 				if x.find("TMDS-1 connected") != -1: 
-					self.post = True
+					self.pre = True
+					return
 					#post = True
 				else:
-					self.post = False
+					self.pre = False
 					#post = False
 			else: pass
 
-			if self.pre == True and self.post == False:
+			if self.pre == False and self.post == True:
 			#if pre == True and post == False:
 				print "ok"
 				os.system("xrandr --output LVDS --mode 1280x800")
@@ -20269,12 +20270,24 @@ class threadedDetector(QThread):
 				self.pre = None
 				self.post = None
 				return
-			else:
-				self.pre = self.post
+			#else:
+			#	self.pre = None
+			#	self.post = None
 				#pre = post
-
+	
 	def run(self):
 		self.timer.start(5000, 0)
+	
+	@classmethod	
+	def setPost(self):
+		print "post called"
+		self.post = True
+
+	@classmethod
+	def resetValues(self):
+		print "reset called"
+		self.post = None
+		self.pre = None
 					
 
 class Form1(QDialog):
@@ -20666,10 +20679,13 @@ class Form1(QDialog):
 	try:
 		#cmd = " ".join(["xrandr --output LVDS --mode",self.LCDlistBoxCloneToHDMI.currentText().ascii(),"--output TMDS-1 --mode",self.HDMIlistBoxClone.currentText().ascii(), "--output VGA --off"])     			
 		#print cmd
-		cmd = " ".join(["xrandr --output LVDS --off", "--output VGA --off"]) 
+		self.thread1.setPost()
+		cmd = " ".join(["xrandr --output LVDS --off", "--output VGA --off"])
+		print cmd
         	status1 = os.system(cmd)
 		cmd = " ".join(["xrandr","--output TMDS-1 --mode",self.HDMIlistBoxClone.currentText().ascii()])
-		#print cmd
+		print self.HDMIlistBoxClone.currentText().ascii()
+		print cmd
 		status2 = os.system(cmd)
 		if status1 or status2:
 			QMessageBox.warning(self, "Warning", "xrandr --output can not be run")
@@ -20680,6 +20696,7 @@ class Form1(QDialog):
 	try:
 		status1 = os.system("xrandr --output LVDS --mode 1280x800")
 		status2	= os.system("xrandr --output TMDS-1 --off")
+		self.thread1.resetValues()
        	
 		if status1 or status2:
 			QMessageBox.warning(self, "Warning", "xrandr --output can not be run")
