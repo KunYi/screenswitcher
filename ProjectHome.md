@@ -1,0 +1,1 @@
+A multihead screen switcher that is used to extedn or clone to vga or dvi output
